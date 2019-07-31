@@ -1,0 +1,29 @@
+version: '2'
+services:
+
+  # angular-service: # The name of the service
+  #     container_name: angularcontainer  # Container name
+  #     build: ./angular-front # Location of our Dockerfile
+  #     volumes: # Volume binding
+  #       - './angular-front:/usr/src/app'
+  #     ports:
+  #       - '4200:4200' # Port mapping
+  #     depends_on:
+  #       - web
+  #     command: >
+  #       bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
+
+  web:
+    build: ./API/
+    volumes:
+     - ./API:/API
+     - /API/node_modules
+    ports:
+     - "1337:1337"
+    depends_on:
+     - mongo
+
+  mongo:
+    image: mongo
+    ports:
+     - "27017:27017"
